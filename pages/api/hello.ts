@@ -1,20 +1,25 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Client } from "@notionhq/client";
+import { RepositoryClient } from '../../repositories/repositoryClient';
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 })
 
-console.log(notion);
+const dbID = process.env.NOTION_DATABASE_ID;
 
 type Data = {
   name: string
 }
 
-export default function handler(
+const postRepository = RepositoryClient.postReposity();
+
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.status(200).json({ name: 'John' })
+  const result = await postRepository.findAll();
+
+  res.status(200).json({ name: JSON.stringify(result) });
 }
