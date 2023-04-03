@@ -1,5 +1,6 @@
 import { Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IPost } from "../domain/Post";
 import { Header } from "../src/components/Header";
@@ -32,12 +33,14 @@ const Posts = () => {
                         {posts.map((post, index) => {
                             return (
                                 <Box key={index}>
-                                    <Heading size='xs' textTransform='uppercase'>
-                                        {post.title}
-                                    </Heading>
-                                    <Text pt='2' fontSize='sm'>
-                                        投稿日: {post.createdAt.toString()}
-                                    </Text>
+                                    <Link href={`post/${post.id}`}>
+                                        <Heading size='xs' textTransform='uppercase'>
+                                            {post.title}
+                                        </Heading>
+                                        <Text pt='2' fontSize='sm'>
+                                            投稿日: {post.createdAt.toString()}
+                                        </Text>
+                                    </Link>
                                 </Box>
                             );
                         })}
