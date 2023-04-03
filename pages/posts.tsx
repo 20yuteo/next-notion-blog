@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
+import { Box, Card, CardBody, CardHeader, Container, Heading, Stack, StackDivider, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -24,29 +24,31 @@ const Posts = () => {
     return (
         <div>
             <Header />
-            <Card>
-                <CardHeader>
-                    <Heading size='md'>記事一覧</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Stack divider={<StackDivider />} spacing='4'>
-                        {posts.map((post, index) => {
+            <VStack>
+                <Container maxW='container.md'>
+                    <Heading size='md' margin={10}>記事一覧</Heading>
+                    {
+                        posts.map((post, index) => {
                             return (
-                                <Box key={index}>
-                                    <Link href={`post/${post.id}`}>
-                                        <Heading size='xs' textTransform='uppercase'>
-                                            {post.title}
-                                        </Heading>
-                                        <Text pt='2' fontSize='sm'>
-                                            投稿日: {post.createdAt.toString()}
-                                        </Text>
-                                    </Link>
-                                </Box>
+                                <Card maxW={1024} marginBottom={8} key={index}>
+                                    <CardBody>
+                                        <Box>
+                                            <Link href={`post/${post.id}`}>
+                                                <Heading size='xs' textTransform='uppercase'>
+                                                    {post.title}
+                                                </Heading>
+                                                <Text pt='2' fontSize='sm'>
+                                                    投稿日: {post.createdAt.toString()}
+                                                </Text>
+                                            </Link>
+                                        </Box>
+                                    </CardBody>
+                                </Card>
                             );
-                        })}
-                    </Stack>
-                </CardBody>
-            </Card>
+                        })
+                    }
+                </Container>
+            </VStack>
         </div>
     )
 }
