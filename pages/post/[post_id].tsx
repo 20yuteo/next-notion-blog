@@ -9,7 +9,7 @@ import { useColorMode } from "@chakra-ui/react";
 const Post = () => {
     const router = useRouter();
     const [recordMap, setRecordMap] = useState<ExtendedRecordMap>();
-    const { colorMode, toggleColorMode } = useColorMode();
+    const { colorMode } = useColorMode();
 
     useEffect(() => {
         const postID = router.query.post_id;
