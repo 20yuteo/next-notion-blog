@@ -10,7 +10,7 @@ const handler = async (
 ) => {
     const result = await postRepository.findAll();
 
-    res.status(200).json({ name: JSON.stringify(result) });
+    res.status(200).json({ body: JSON.stringify(result) });
 }
 
 export default handler;
