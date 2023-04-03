@@ -2,7 +2,6 @@ import { Client } from "@notionhq/client";
 import { dbID } from "../config/db";
 import { IPost } from "../domain/Post"
 import { NotionAPI } from 'notion-client';
-import * as notion from 'notion-types';
 
 export class PostRepository {
     private client: Client;

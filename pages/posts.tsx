@@ -1,4 +1,5 @@
-import { Box, Card, CardBody, CardHeader, Container, Heading, Stack, StackDivider, Text, VStack } from "@chakra-ui/react";
+import dayjs from 'dayjs';
+import { Box, Card, CardBody, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ const Posts = () => {
                 return {
                     id: post.id,
                     title: post.title,
-                    createdAt: post.createdAt
+                    createdAt: dayjs(post.createdAt).format("YYYY/MM/DD")
                 }
             }))
         })();
