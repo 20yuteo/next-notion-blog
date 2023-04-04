@@ -12,6 +12,7 @@ const Posts = () => {
 
     useEffect(() => {
         (async () => {
+            console.log(endpoint);
             const res = await axios.get(`${endpoint}/api/posts`);
             setPosts(JSON.parse(res.data.body).map((post: IPost) => {
                 return {
