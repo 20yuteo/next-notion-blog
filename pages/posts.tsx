@@ -5,13 +5,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IPost } from "../domain/Post";
 import { Header } from "../src/components/Header";
+import { endpoint } from '../config/endpoint';
 
 const Posts = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get("http://localhost:3000/api/posts");
+            const res = await axios.get(`${endpoint}/api/posts`);
             setPosts(JSON.parse(res.data.body).map((post: IPost) => {
                 return {
                     id: post.id,

@@ -5,6 +5,7 @@ import { ExtendedRecordMap } from 'notion-types';
 import { NotionRenderer } from 'react-notion-x'
 import { Header } from "../../src/components/Header";
 import { useColorMode } from "@chakra-ui/react";
+import { endpoint } from "../../config/endpoint";
 
 const Post = () => {
     const router = useRouter();
@@ -18,7 +19,7 @@ const Post = () => {
             if (!postID) {
                 return;
             }
-            const res = await fetch(`http://localhost:3000/api/post/${postID}`);
+            const res = await fetch(`${endpoint}/api/post/${postID}`);
             const data = await res.json();
 
             if (!data.recordMap) {

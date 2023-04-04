@@ -1,0 +1,1 @@
+export const endpoint = process.env.END_POINT || "http://localhost:3000";
