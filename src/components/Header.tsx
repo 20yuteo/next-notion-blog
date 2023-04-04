@@ -18,7 +18,7 @@ export const Header: FC = () => {
                 <Flex as="header" py="4" justifyContent="space-between" alignItems="center">
                     <NextLink href="/" passHref>
                         <Heading as='h1' fontSize="lg" cursor="pointer" color={useColorModeValue('gray.600', 'white')}>
-                            カオスなブログ🍣
+                            カオスなブログ🍔
                         </Heading>
                     </NextLink>
                     <Button size='lg' onClick={toggleColorMode}>
