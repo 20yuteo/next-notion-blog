@@ -1,10 +1,8 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { ExtendedRecordMap } from 'notion-types';
-import { NotionRenderer } from 'react-notion-x'
-import { Header } from "../../src/components/Header";
 import { Container, useColorMode } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { ExtendedRecordMap } from 'notion-types';
+import { useEffect, useState } from "react";
+import { NotionRenderer } from 'react-notion-x';
 import { endpoint } from "../../config/endpoint";
 
 const Post = () => {
