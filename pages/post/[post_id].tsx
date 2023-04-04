@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ExtendedRecordMap } from 'notion-types';
 import { NotionRenderer } from 'react-notion-x'
 import { Header } from "../../src/components/Header";
-import { useColorMode } from "@chakra-ui/react";
+import { Container, useColorMode } from "@chakra-ui/react";
 import { endpoint } from "../../config/endpoint";
 
 const Post = () => {
@@ -32,8 +32,11 @@ const Post = () => {
 
     return (
         <>
-            <Header />
-            {recordMap && <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />}
+            {recordMap && (
+                <Container maxW='container.md'>
+                    <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />
+                </Container>
+            )}
         </>
     )
 }

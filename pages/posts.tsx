@@ -24,8 +24,7 @@ const Posts = () => {
     }, [])
 
     return (
-        <div>
-            <Header />
+        <>
             <VStack>
                 <Container maxW='container.md'>
                     <Heading size='md' margin={10}>記事一覧</Heading>
@@ -51,7 +50,7 @@ const Posts = () => {
                     }
                 </Container>
             </VStack>
-        </div>
+        </>
     )
 }
 
