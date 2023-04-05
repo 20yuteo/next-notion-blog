@@ -4,12 +4,14 @@ import { ExtendedRecordMap } from 'notion-types';
 import { useEffect, useState } from "react";
 import { NotionRenderer } from 'react-notion-x';
 import { endpoint } from "../../config/endpoint";
+import CustomHead from "../../src/components/CustomHead";
 
 const Post = () => {
     const router = useRouter();
     const [recordMap, setRecordMap] = useState<ExtendedRecordMap>();
     const { colorMode } = useColorMode();
 
+    const pageTitle = router.query.title as string;
     useEffect(() => {
         const postID = router.query.post_id;
 
@@ -31,9 +33,12 @@ const Post = () => {
     return (
         <>
             {recordMap && (
-                <Container maxW='container.md'>
-                    <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />
-                </Container>
+                <>
+                    <CustomHead title={pageTitle} content={pageTitle} />
+                    <Container maxW='container.md'>
+                        <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />
+                    </Container>
+                </>
             )}
         </>
     )
