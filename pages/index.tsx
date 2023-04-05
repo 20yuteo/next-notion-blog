@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react';
+import { Box, Card, CardBody, Container, Heading, Link, Skeleton, Stack, Text, VStack } from '@chakra-ui/react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -26,7 +26,7 @@ export default function Home() {
       <VStack>
         <Container maxW='container.md'>
           <Heading size='md' margin={10}>記事一覧</Heading>
-          {
+          {posts.length ?
             posts.map((post, index) => {
               return (
                 <Card maxW={1024} marginBottom={8} key={index}>
@@ -44,7 +44,12 @@ export default function Home() {
                   </CardBody>
                 </Card>
               );
-            })
+            }) :
+            Array.from({ length: 6 }, (_, index) => (
+              <Stack key={index}>
+                <Skeleton height='20px' padding={10} borderRadius={8} marginBottom={8} />
+              </Stack>
+            ))
           }
         </Container>
       </VStack>

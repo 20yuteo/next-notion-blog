@@ -1,4 +1,4 @@
-import { Container, useColorMode } from "@chakra-ui/react";
+import { Container, SkeletonText, Spinner, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ExtendedRecordMap } from 'notion-types';
 import { useEffect, useState } from "react";
@@ -32,14 +32,15 @@ const Post = () => {
 
     return (
         <>
-            {recordMap && (
-                <>
-                    <CustomHead title={pageTitle} content={pageTitle} />
-                    <Container maxW='container.md'>
-                        <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />
-                    </Container>
-                </>
-            )}
+            {recordMap ? (
+                <Container maxW='container.md'>
+                    <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />
+                </Container>
+            ) :
+                <Container maxW='container.md'>
+                    <SkeletonText mt='14' noOfLines={22} spacing='4' skeletonHeight='4' />
+                </Container>
+            }
         </>
     )
 }
