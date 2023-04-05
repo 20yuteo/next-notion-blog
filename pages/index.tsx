@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Container, Heading, Link, Text, VStack } from '@chakra-ui/react';
+import { Box, Card, CardBody, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -32,7 +32,7 @@ export default function Home() {
                 <Card maxW={1024} marginBottom={8} key={index}>
                   <CardBody>
                     <Box>
-                      <Link href={`post/${post.id}`}>
+                      <Link href={`post/${post.id}?title=${post.title}`}>
                         <Heading size='xs' textTransform='uppercase'>
                           {post.title}
                         </Heading>
