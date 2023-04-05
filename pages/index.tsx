@@ -32,7 +32,7 @@ export default function Home() {
                 <Card maxW={1024} marginBottom={8} key={index}>
                   <CardBody>
                     <Box>
-                      <Link href={`post/${post.id}`}>
+                      <Link href={`post/${post.id}?title=${post.title}`}>
                         <Heading size='xs' textTransform='uppercase'>
                           {post.title}
                         </Heading>

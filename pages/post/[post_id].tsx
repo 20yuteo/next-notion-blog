@@ -4,12 +4,14 @@ import { ExtendedRecordMap } from 'notion-types';
 import { useEffect, useState } from "react";
 import { NotionRenderer } from 'react-notion-x';
 import { endpoint } from "../../config/endpoint";
+import CustomHead from "../../src/components/CustomHead";
 
 const Post = () => {
     const router = useRouter();
     const [recordMap, setRecordMap] = useState<ExtendedRecordMap>();
     const { colorMode } = useColorMode();
 
+    const pageTitle = router.query.title as string;
     useEffect(() => {
         const postID = router.query.post_id;
 
@@ -39,7 +41,6 @@ const Post = () => {
                     <SkeletonText mt='14' noOfLines={22} spacing='4' skeletonHeight='4' />
                 </Container>
             }
-
         </>
     )
 }
