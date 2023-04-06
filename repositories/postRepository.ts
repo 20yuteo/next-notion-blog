@@ -55,7 +55,10 @@ export class PostRepository {
         // }
         const notion = new NotionAPI();
 
+        // const recordMap = await notion.getPage(postID);
+        console.log({ postID })
         const recordMap = await notion.getPage(postID);
+        console.log({ recordMap })
         return {
             recordMap
         }

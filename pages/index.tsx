@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <>
-      <VStack>
+      <VStack flexGrow={2} maxH={"100%"}>
         <Container maxW='container.md'>
           <Heading size='md' margin={10}>記事一覧</Heading>
           {posts.length ?
