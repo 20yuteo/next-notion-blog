@@ -2,7 +2,7 @@ import {
     Box, Button, Container, Flex, Heading, useMediaQuery
 } from '@chakra-ui/react';
 import NextLink from "next/link";
-import { FaTwitter } from "react-icons/fa";
+// import { FaTwitter } from "react-icons/fa";
 
 export const Footer = () => {
     const [isSmallerThen425] = useMediaQuery("(max-width: 425px)");
@@ -16,9 +16,9 @@ export const Footer = () => {
                                 🍔
                             </Heading>
                         </NextLink>
-                        <NextLink href={'https://twitter.com/livertychaos'}>
+                        {/* <NextLink href={'https://twitter.com/livertychaos'}>
                             <Button colorScheme='twitter' width={"5px"} leftIcon={<FaTwitter />} iconSpacing={"0"} borderRadius={"50px"} />
-                        </NextLink>
+                        </NextLink> */}
                         {/* <Button color={"brown"} width={"5px"} borderRadius={"50px"} >
                             ☕️
                         </Button> */}
