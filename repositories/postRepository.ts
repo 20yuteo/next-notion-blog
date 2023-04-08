@@ -1,7 +1,6 @@
 import { Client } from "@notionhq/client";
 import { dbID } from "../config/db";
-import { IPost } from "../domain/Post"
-import { NotionAPI } from 'notion-client';
+import { IPost } from "../domain/Post";
 
 export class PostRepository {
     private client: Client;
@@ -45,22 +44,13 @@ export class PostRepository {
     }
 
     async find(postID: string) {
-        // const res = await this.client.blocks.children.list({
-        //     block_id: postID
-        // })
+        const res = await this.client.blocks.children.list({
+            block_id: postID
+        })
 
-        // return {
-        //     id: postID,
-        //     body: res
-        // }
-        const notion = new NotionAPI();
-
-        // const recordMap = await notion.getPage(postID);
-        console.log({ postID })
-        const recordMap = await notion.getPage(postID);
-        console.log({ recordMap })
         return {
-            recordMap
+            id: postID,
+            body: res.results
         }
     }
 }

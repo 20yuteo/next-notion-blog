@@ -1,14 +1,14 @@
-import { Container, SkeletonText, Spinner, useColorMode } from "@chakra-ui/react";
+import { Container, SkeletonText, useColorMode } from "@chakra-ui/react";
+import { BlockObjectResponse, PartialBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { useRouter } from "next/router";
 import { ExtendedRecordMap } from 'notion-types';
 import { useEffect, useState } from "react";
-import { NotionRenderer } from 'react-notion-x';
+import { NotionBlock, Render } from '@9gustin/react-notion-render'
 import { endpoint } from "../../config/endpoint";
-import CustomHead from "../../src/components/CustomHead";
 
 const Post = () => {
     const router = useRouter();
-    const [recordMap, setRecordMap] = useState<ExtendedRecordMap>();
+    const [block, setBlock] = useState<(NotionBlock)[]>([]);
     const { colorMode } = useColorMode();
 
     const pageTitle = router.query.title as string;
@@ -22,19 +22,21 @@ const Post = () => {
             const res = await fetch(`${endpoint}/api/post/${postID}`);
             const data = await res.json();
 
-            if (!data.recordMap) {
+            if (!data.body) {
                 return;
             }
 
-            setRecordMap(data.recordMap);
+            setBlock(data.body.map((context: any) => context));
         })();
     }, [router.query]);
 
     return (
         <>
-            {recordMap ? (
+            {block.length > 0 ? (
                 <Container maxW='container.md'>
-                    <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={colorMode === "dark"} />
+                    {
+                        <Render blocks={block} />
+                    }
                 </Container>
             ) :
                 <Container maxW='container.md'>

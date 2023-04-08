@@ -9,9 +9,9 @@ const handler = async (
     res: NextApiResponse
 ) => {
     const { postID } = req.query;
-    const { recordMap } = await postRepository.find(postID as string);
+    const { body } = await postRepository.find(postID as string);
 
-    res.status(200).json({ recordMap });
+    res.status(200).json({ body });
 }
 
 export default handler;
