@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from "next/link";
 import { FC } from 'react';
-import { FaTwitter } from "react-icons/fa";
+// import { FaTwitter } from "react-icons/fa";
 
 export const Header: FC<{ flexGrow: number }> = (props: { flexGrow: number }) => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -20,13 +20,13 @@ export const Header: FC<{ flexGrow: number }> = (props: { flexGrow: number }) =>
                         </Heading>
                     </NextLink>
                     <Box>
-                        {isLargerThen425 && (
+                        {/* {isLargerThen425 && (
                             <>
                                 <NextLink href={'https://twitter.com/livertychaos'}>
                                     <Button colorScheme='twitter' width={"5px"} leftIcon={<FaTwitter />} iconSpacing={"0"} borderRadius={"50px"} marginRight={10} />
                                 </NextLink>
                             </>
-                        )}
+                        )} */}
                         <Button size='lg' onClick={toggleColorMode}>
                             {colorMode === 'light' ? <>🌜</> : <>🌞</>}
                         </Button>

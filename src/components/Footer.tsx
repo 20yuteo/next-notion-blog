@@ -19,9 +19,9 @@ export const Footer = () => {
                         <NextLink href={'https://twitter.com/livertychaos'}>
                             <Button colorScheme='twitter' width={"5px"} leftIcon={<FaTwitter />} iconSpacing={"0"} borderRadius={"50px"} />
                         </NextLink>
-                        {/* <Button color={"brown"} width={"5px"} borderRadius={"50px"} >
+                        <Button color={"brown"} width={"5px"} borderRadius={"50px"} >
                             ☕️
-                        </Button> */}
+                        </Button>
                     </Flex>
                 </Container>
             </Box>)}
