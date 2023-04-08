@@ -5,7 +5,7 @@ import CustomHead from '../src/components/CustomHead'
 import { Footer } from '../src/components/Footer'
 import { Header } from "../src/components/Header"
 import '../styles/globals.css'
-import { theme } from "./Theme"
+import theme from "./Theme"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
