@@ -1,10 +1,19 @@
-import { Container, SkeletonText, useColorMode } from "@chakra-ui/react";
-import { BlockObjectResponse, PartialBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { NotionBlock, Render, withContentValidation } from '@9gustin/react-notion-render';
+import { Box, Container, Heading, SkeletonText, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ExtendedRecordMap } from 'notion-types';
-import { useEffect, useState } from "react";
-import { NotionBlock, Render } from '@9gustin/react-notion-render'
+import { ReactNode, useEffect, useState } from "react";
 import { endpoint } from "../../config/endpoint";
+
+const MyHeading = (props: { plainText: ReactNode }) => <Heading className="my-h1-class" marginTop={"30px"}>{props.plainText}</Heading>
+
+
+const MyParagraph = (props: { plainText: ReactNode }) => {
+    return (
+        <>
+            <Box marginTop={"10px"} marginBottom={"10px"} >{props.plainText}</Box>
+        </>
+    )
+}
 
 const Post = () => {
     const router = useRouter();
@@ -33,9 +42,12 @@ const Post = () => {
     return (
         <>
             {block.length > 0 ? (
-                <Container maxW='container.md'>
+                <Container maxW='container.md' flexGrow={1}>
                     {
-                        <Render blocks={block} />
+                        <Render blocks={block} blockComponentsMapper={{
+                            heading_1: withContentValidation(MyHeading),
+                            paragraph: withContentValidation(MyParagraph)
+                        }} />
                     }
                 </Container>
             ) :
