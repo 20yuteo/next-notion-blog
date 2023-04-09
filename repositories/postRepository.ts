@@ -32,11 +32,11 @@ export class PostRepository {
         return res.results.map((res => {
             // TODO: properties非推奨になったため暫定対応
             if ("properties" in res) {
-                if ("title" in res.properties.title) {
+                if ("title" in res.properties.title && "date" in res.properties.date) {
                     return {
                         id: res.id,
                         title: res.properties.title.title[0].plain_text,
-                        createdAt: new Date(res.created_time)
+                        createdAt: new Date(res.properties.date.date!.start)
                     }
                 }
             }

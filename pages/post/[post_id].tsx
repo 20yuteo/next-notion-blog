@@ -1,15 +1,26 @@
-import { Container, SkeletonText, useColorMode } from "@chakra-ui/react";
-import { BlockObjectResponse, PartialBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { NotionBlock, Render, withContentValidation } from '@9gustin/react-notion-render';
+import { Box, Container, Heading, SkeletonText, useColorMode, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ExtendedRecordMap } from 'notion-types';
-import { useEffect, useState } from "react";
-import { NotionBlock, Render } from '@9gustin/react-notion-render'
+import { ReactNode, useEffect, useState } from "react";
 import { endpoint } from "../../config/endpoint";
+import { useWindowSize } from '../../hooks/useWindowSize';
+
+const MyHeading = (props: { plainText: ReactNode }) => <Heading className="my-h1-class" marginTop={"30px"}>{props.plainText}</Heading>
+
+
+const MyParagraph = (props: { plainText: ReactNode }) => {
+    return (
+        <>
+            <Box marginTop={"10px"} marginBottom={"10px"} >{props.plainText}</Box>
+        </>
+    )
+}
 
 const Post = () => {
     const router = useRouter();
     const [block, setBlock] = useState<(NotionBlock)[]>([]);
-    const { colorMode } = useColorMode();
+    const toast = useToast();
+    const [width] = useWindowSize();
 
     const pageTitle = router.query.title as string;
     useEffect(() => {
@@ -17,30 +28,50 @@ const Post = () => {
 
         (async () => {
             if (!postID) {
+                toast({
+                    title: 'Page Not Found.',
+                    description: "ページが見つかりません。",
+                    status: 'error',
+                    duration: 10000,
+                    isClosable: true,
+                });
                 return;
             }
             const res = await fetch(`${endpoint}/api/post/${postID}`);
             const data = await res.json();
 
             if (!data.body) {
+                toast({
+                    title: 'Page Not Found.',
+                    description: "ページが見つかりません。",
+                    status: 'error',
+                    duration: 10000,
+                    isClosable: true,
+                });
                 return;
             }
 
             setBlock(data.body.map((context: any) => context));
         })();
-    }, [router.query]);
+    }, [router.query, toast]);
 
     return (
         <>
             {block.length > 0 ? (
-                <Container maxW='container.md'>
+                <Container maxW='container.md' flexGrow={1}>
+                    <Heading fontSize={"5xl"}>
+                        {pageTitle}
+                    </Heading>
                     {
-                        <Render blocks={block} />
+                        <Render blocks={block} blockComponentsMapper={{
+                            heading_1: withContentValidation(MyHeading),
+                            paragraph: withContentValidation(MyParagraph)
+                        }} />
                     }
                 </Container>
             ) :
                 <Container maxW='container.md'>
-                    <SkeletonText mt='14' noOfLines={22} spacing='4' skeletonHeight='4' />
+                    <SkeletonText mt='14' noOfLines={width < 426 ? 15 : 18} spacing='4' skeletonHeight='4' />
                 </Container>
             }
         </>
