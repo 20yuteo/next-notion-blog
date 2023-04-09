@@ -7,7 +7,7 @@ import NextLink from "next/link";
 import { FC } from 'react';
 // import { FaTwitter } from "react-icons/fa";
 
-export const Header: FC<{ flexGrow: number }> = (props: { flexGrow: number }) => {
+const Header: FC<{ flexGrow: number }> = (props: { flexGrow: number }) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [isLargerThen425] = useMediaQuery("(min-width: 425px)");
     return (
@@ -36,3 +36,5 @@ export const Header: FC<{ flexGrow: number }> = (props: { flexGrow: number }) =>
         </Box>
     );
 }
+
+export default Header;

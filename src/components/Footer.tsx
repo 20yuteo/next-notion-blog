@@ -4,7 +4,7 @@ import {
 import NextLink from "next/link";
 import { FaTwitter } from "react-icons/fa";
 
-export const Footer = () => {
+const Footer = () => {
     const [isSmallerThen425] = useMediaQuery("(max-width: 425px)");
     return (
         <>
@@ -28,3 +28,5 @@ export const Footer = () => {
         </>
     );
 }
+
+export default Footer;
