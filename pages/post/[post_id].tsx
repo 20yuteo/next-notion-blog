@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 import { endpoint } from "../../config/endpoint";
 import { useWindowSize } from '../../hooks/useWindowSize';
+import CustomHead from '../../src/components/CustomHead';
 
 const MyHeading = (props: { plainText: ReactNode }) => <Heading className="my-h1-class" marginTop={"30px"}>{props.plainText}</Heading>
 
@@ -28,35 +29,42 @@ const Post = () => {
 
         (async () => {
             if (!postID) {
+                return;
+            }
+
+            try {
+                const res = await fetch(`${endpoint}/api/post/${postID}`);
+                const data = await res.json();
+
+                if (!data.body) {
+                    console.log("not found 2")
+                    toast({
+                        title: 'Page Not Found.',
+                        description: "ページが見つかりません。",
+                        status: 'error',
+                        duration: 10000,
+                        isClosable: true,
+                    });
+                    return;
+                }
+
+                setBlock(data.body.map((context: any) => context));
+            } catch (e: any) {
                 toast({
-                    title: 'Page Not Found.',
-                    description: "ページが見つかりません。",
+                    title: 'Server Error.',
+                    description: "サーバーでエラーが発生しました。",
                     status: 'error',
                     duration: 10000,
                     isClosable: true,
                 });
                 return;
             }
-            const res = await fetch(`${endpoint}/api/post/${postID}`);
-            const data = await res.json();
-
-            if (!data.body) {
-                toast({
-                    title: 'Page Not Found.',
-                    description: "ページが見つかりません。",
-                    status: 'error',
-                    duration: 10000,
-                    isClosable: true,
-                });
-                return;
-            }
-
-            setBlock(data.body.map((context: any) => context));
         })();
     }, [router.query, toast]);
 
     return (
         <>
+            <CustomHead title={pageTitle} content={pageTitle} />
             {block.length > 0 ? (
                 <Container maxW='container.md' flexGrow={1}>
                     <Heading fontSize={"5xl"}>
