@@ -37,7 +37,6 @@ const Post = () => {
                 const data = await res.json();
 
                 if (!data.body) {
-                    console.log("not found 2")
                     toast({
                         title: 'Page Not Found.',
                         description: "ページが見つかりません。",
@@ -78,7 +77,7 @@ const Post = () => {
                     }
                 </Container>
             ) :
-                <Container maxW='container.md'>
+                <Container maxW='container.md' flexGrow={1}>
                     <SkeletonText mt='14' noOfLines={width < 426 ? 15 : 18} spacing='4' skeletonHeight='4' />
                 </Container>
             }
