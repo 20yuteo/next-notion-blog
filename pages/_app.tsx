@@ -5,6 +5,10 @@ import CustomHead from '../src/components/CustomHead'
 import Footer from '../src/components/Footer'
 import Header from "../src/components/Header"
 import '../styles/globals.css'
+import GAScript from '../src/components/GAScript'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { pageview } from '../config/gtag'
 
 const Theme = extendTheme({
   styles: {
@@ -17,8 +21,21 @@ const Theme = extendTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouterChange = (url: string) => {
+      pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouterChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouterChange);
+    };
+  }, [router.events]);
+
   return (
     <ChakraProvider theme={Theme}>
+      <GAScript />
       <CustomHead />
       <Flex flexDirection={"column"}>
         <Header flexGrow={1} />
